@@ -5,10 +5,7 @@ using UnityEngine.Networking;
 using Singleton;
 using System.Text;
 
-enum RequestType {
-    GET,
-    POST,
-}
+
 
 public class HTTPServer : Singleton<HTTPServer>
 {
