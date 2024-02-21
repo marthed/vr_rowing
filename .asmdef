@@ -1,0 +1,6 @@
+{
+    "name": "Rowing",
+    "references": [],
+    "defineConstraints": ["UNITY_2021_1_OR_NEWER", "NET_4_8"],
+    "optionalUnityReferences": []
+}
