@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     [field: SerializeField] public CoinPosition[] Track6Pos;
 
     [Header("State")]
+    
     private int dummy = 1;
     [field: SerializeField, ReadOnly] private GameState CurrentGameState { get; set; }
     [field: SerializeField, ReadOnly] private int CurrentGoldCoinNumber { get; set; }
@@ -274,6 +275,7 @@ public class GameManager : Singleton<GameManager>
 
         if (_missCoinZone == null) {
             missCoinZoneObject =  Instantiate(missCoinZonePrefab, _coin1.transform.position + new Vector3(0, 0, 10), Quaternion.identity);
+            missCoinZoneObject.GetComponent<MissCoinZone>().OnHit += CoinHasBeenMissed;
         }
         else {
             missCoinZoneObject = _missCoinZone.gameObject;
@@ -282,7 +284,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         _missCoinZone = missCoinZoneObject.GetComponent<MissCoinZone>();
-        _missCoinZone.OnHit += CoinHasBeenMissed;
+       
     }
 
     public void GenerateTracks() {
@@ -445,14 +447,14 @@ public class GameManager : Singleton<GameManager>
             _missCoinZone.gameObject.SetActive(false);
             _cone.gameObject.SetActive(false);
 
-            SetGameStateSetup(); 
+            //SetGameStateSetup(); 
 
         }
         else {
             Debug.Log("Trail completed!");
             _coin1.gameObject.SetActive(false);
-            _missCoinZone.gameObject.SetActive(false);
             _coin2.gameObject.SetActive(false);
+             _missCoinZone.gameObject.SetActive(false);
             _cone.gameObject.SetActive(false);
 
             int hits = 0;

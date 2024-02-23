@@ -2227,7 +2227,7 @@ MonoBehaviour:
   headForceUpMax: 10
   headUpForceOffset: 1
   inverted: 0
-  controlOnDesktop: 0
+  controlOnDesktop: 1
   desktopSpeed: 4000
   desktopTurnForce: 5
   desktopUpForce: 5
@@ -4425,7 +4425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5363751430636011467, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: serverAddress
-      value: http://192.168.209.92
+      value: http://192.168.194.92
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2468e66bb960a841b90e6415618d43a, type: 3}

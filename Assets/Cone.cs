@@ -14,6 +14,10 @@ public class Cone : MonoBehaviour
         _y = transform.position.y;
     }
 
+    void OnEnable() {
+        _y = transform.position.y;
+    }
+
     void FixedUpdate()
     {
         _y = transform.position.y; 

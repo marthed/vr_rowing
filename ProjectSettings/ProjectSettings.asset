@@ -798,11 +798,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 2348743e-da7b-4321-ba14-1b8e30c8e1e5
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Rowing
+  organizationId: cmhedlund
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

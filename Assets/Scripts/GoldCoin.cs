@@ -20,12 +20,16 @@ public class GoldCoin : MonoBehaviour
     private AudioSource _audioSource;
 
 
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        StartCoroutine(Rotate()); 
     }
 
+
+    void OnEnable() {
+        StartCoroutine(Rotate()); 
+    }
 
     private IEnumerator Rotate()
     {
