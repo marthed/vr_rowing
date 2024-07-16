@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5881241, g: 0.59516996, b: 0.59948856, a: 1}
+  m_IndirectSpecularColor: {r: 0.58812344, g: 0.59516925, b: 0.5994878, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2227,7 +2227,7 @@ MonoBehaviour:
   headForceUpMax: 10
   headUpForceOffset: 1
   inverted: 0
-  controlOnDesktop: 1
+  controlOnDesktop: 0
   desktopSpeed: 4000
   desktopTurnForce: 5
   desktopUpForce: 5
@@ -3536,7 +3536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1663384588
 Transform:
   m_ObjectHideFlags: 0
@@ -4119,6 +4119,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8796550843292421272, guid: 680a3c3a6ca46644c9a9b64e78e44ab9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796550843292421272, guid: 680a3c3a6ca46644c9a9b64e78e44ab9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796550843292421272, guid: 680a3c3a6ca46644c9a9b64e78e44ab9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -4174,6 +4182,10 @@ PrefabInstance:
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: hideLogs
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: oculusQuestIp
+      value: 192.168.231.218
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnFeetInput.m_PersistentCalls.m_Calls.Array.size
@@ -4425,7 +4437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5363751430636011467, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: serverAddress
-      value: http://192.168.194.92
+      value: 192.168.231.92
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2468e66bb960a841b90e6415618d43a, type: 3}

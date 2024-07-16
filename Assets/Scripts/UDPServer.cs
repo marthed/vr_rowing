@@ -12,35 +12,37 @@ public class UDPServer : MonoBehaviour
 {
     #region "Inspector Members"
     [SerializeField] int port = 8080;
-   [SerializeField] bool hideLogs = false;
+    [SerializeField] bool hideLogs = false;
 
-   [Header("Sensor Events")]
-   [Tooltip("Event is triggered when UDPServer receives sensor data for steering")]
-   public UnityEvent<string> OnHandInput;
+    [SerializeField] string oculusQuestIp = "192.168.209.218";
 
-   [Tooltip("Event is triggered when UDPServer receives sensor data for steering")]
-   public UnityEvent<string> OnFeetInput;
+    [Header("Sensor Events")]
+    [Tooltip("Event is triggered when UDPServer receives sensor data for steering")]
+    public UnityEvent<string> OnHandInput;
 
-   [Tooltip("Event is triggered when UDPServer receives sensor data for speed")]
-   public UnityEvent<string> OnSpeedInput;
+    [Tooltip("Event is triggered when UDPServer receives sensor data for steering")]
+    public UnityEvent<string> OnFeetInput;
 
-   [Tooltip("Event is triggered when UDPServer is requested to change steering method")]
-   public UnityEvent<string> OnMethodChange;
-   
-   [Tooltip("Event is triggered when UDPServer is requested to change travel method")]
-   public UnityEvent<string> OnTravelChange;
+    [Tooltip("Event is triggered when UDPServer receives sensor data for speed")]
+    public UnityEvent<string> OnSpeedInput;
 
-   [Tooltip("Event is triggered when UDPServer is requested to go to next game state")]
-   public UnityEvent<string> OnNextGameState;
+    [Tooltip("Event is triggered when UDPServer is requested to change steering method")]
+    public UnityEvent<string> OnMethodChange;
 
-   [Tooltip("Event is triggered when UDPServer is requested to change track")]
-   public UnityEvent<string> OnTrackChange;
+    [Tooltip("Event is triggered when UDPServer is requested to change travel method")]
+    public UnityEvent<string> OnTravelChange;
 
-   [Tooltip("Event is triggered when UDPServer is requested to toggle head method axis")]
-   public UnityEvent OnToggleInverted;
+    [Tooltip("Event is triggered when UDPServer is requested to go to next game state")]
+    public UnityEvent<string> OnNextGameState;
 
-   [Tooltip("Event is triggered when UDPServer is requested to toggle control on desktop")]
-   public UnityEvent OnToggleControlDesktop;
+    [Tooltip("Event is triggered when UDPServer is requested to change track")]
+    public UnityEvent<string> OnTrackChange;
+
+    [Tooltip("Event is triggered when UDPServer is requested to toggle head method axis")]
+    public UnityEvent OnToggleInverted;
+
+    [Tooltip("Event is triggered when UDPServer is requested to toggle control on desktop")]
+    public UnityEvent OnToggleControlDesktop;
 
     #endregion
 
@@ -60,7 +62,7 @@ public class UDPServer : MonoBehaviour
 
         string wifiIpAddress = string.Empty;
 
-        
+
         NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
         foreach (NetworkInterface iface in interfaces)
         {
@@ -82,7 +84,7 @@ public class UDPServer : MonoBehaviour
             }
         }
         Debug.Log("Wifi ip address: " + wifiIpAddress);
-        string testThisIpAdress = !string.IsNullOrEmpty(wifiIpAddress) ? wifiIpAddress : "192.168.209.218";  // Oculus Quest Ip
+        string testThisIpAdress = !string.IsNullOrEmpty(wifiIpAddress) ? wifiIpAddress : oculusQuestIp;  // Oculus Quest Ip
 
         IPAddress ipAddress = IPAddress.Parse(testThisIpAdress);
         IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
@@ -98,7 +100,7 @@ public class UDPServer : MonoBehaviour
 
     void Update()
     {
-        if(Time.frameCount % frameWait == 0 && udp != null && udp.Available != 0)
+        if (Time.frameCount % frameWait == 0 && udp != null && udp.Available != 0)
         {
             byte[] packet = new byte[64];
             EndPoint sender = new IPEndPoint(IPAddress.Any, port);
@@ -106,33 +108,36 @@ public class UDPServer : MonoBehaviour
             int rec = udp.ReceiveFrom(packet, ref sender);
             string info = Encoding.Default.GetString(packet);
 
-            if (!hideLogs) {
+            if (!hideLogs)
+            {
                 Debug.Log("Server received: " + info);
             }
 
 
             HandleUDPMessage(info);
-            
 
-            if(info[0] == 'n' && clients.Count < maxClients)
+
+            if (info[0] == 'n' && clients.Count < maxClients)
                 HandleNewClient(sender, info);
-            else if(info[0] == 'e')
+            else if (info[0] == 'e')
                 DisconnectClient(sender, info);
-            else if(rec > 0)
+            else if (rec > 0)
             {
                 string id = Parser.ParseID(info);
                 int seqNumber = Parser.ParseSequenceNumber(info);
-                if(id == "" || seqNumber == -1)    return;
+                if (id == "" || seqNumber == -1) return;
 
                 string userInput = Parser.ParseInput(info);
-                if(userInput != "")
+                if (userInput != "")
                     HandleUserMoveInput(sender, userInput, seqNumber);
             }
         }
     }
 
-    void HandleUDPMessage(string msg) {
-        switch(msg.Substring(0, 2)) {
+    void HandleUDPMessage(string msg)
+    {
+        switch (msg.Substring(0, 2))
+        {
             case "an":
                 InfoBoard.Instance.SetSpeedText("Speed: " + msg);
                 OnSpeedInput?.Invoke(msg);
@@ -143,7 +148,7 @@ public class UDPServer : MonoBehaviour
 
                 break;
             case "bg": // button gyro
-                OnHandInput?.Invoke(msg); 
+                OnHandInput?.Invoke(msg);
                 InfoBoard.Instance.SetHandsText("Hands:" + msg);
                 break;
             case "me":
@@ -181,23 +186,23 @@ public class UDPServer : MonoBehaviour
 
     void DisconnectClient(EndPoint sender, string data)
     {
-        if(clients.ContainsKey(sender))
+        if (clients.ContainsKey(sender))
             clients.Remove(sender);
         Broadcast(data);
     }
 
     void Broadcast(string data)
     {
-        foreach(KeyValuePair<EndPoint, UDPClient2> p in clients)
+        foreach (KeyValuePair<EndPoint, UDPClient2> p in clients)
             SendPacket(data, p.Key);
     }
 
     void HandleUserMoveInput(EndPoint client, string userInput, int seqNumber)
     {
-        if(!clients.ContainsKey(client) || clients[client].lastSeqNumber > seqNumber)
+        if (!clients.ContainsKey(client) || clients[client].lastSeqNumber > seqNumber)
             return;
 
-        if(!clients[client].history.ContainsKey(seqNumber))
+        if (!clients[client].history.ContainsKey(seqNumber))
         {
             clients[client].UpdateStateHistory(seqNumber);
             clients[client].lastSeqNumber = seqNumber;
@@ -209,20 +214,20 @@ public class UDPServer : MonoBehaviour
 
     void UpdatePosition(EndPoint addr, string input)
     {
-        if(input.Equals("a"))
+        if (input.Equals("a"))
             clients[addr].position.x -= moveDistance;
-        else if(input.Equals("d"))
+        else if (input.Equals("d"))
             clients[addr].position.x += moveDistance;
-        else if(input.Equals("w"))
+        else if (input.Equals("w"))
             clients[addr].position.y += moveDistance;
-        else if(input.Equals("s"))
+        else if (input.Equals("s"))
             clients[addr].position.y -= moveDistance;
     }
 
     void SendPositionToAllClients()
     {
-        foreach(KeyValuePair<EndPoint, UDPClient2> p in clients)
-            foreach(KeyValuePair<EndPoint, UDPClient2> p2 in clients)
+        foreach (KeyValuePair<EndPoint, UDPClient2> p in clients)
+            foreach (KeyValuePair<EndPoint, UDPClient2> p2 in clients)
                 SendPacket(p2.Value.ToString(), p.Key);
     }
 
