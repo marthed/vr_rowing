@@ -25,12 +25,15 @@ public class UDPServer : MonoBehaviour
 
     [Tooltip("Event is triggered when UDPServer receives sensor data for speed")]
     public UnityEvent<string> OnSpeedInput;
+   [Tooltip("Event is triggered when UDPServer is requested to change steering method")]
+   public UnityEvent<string> OnMethodChange;
+   
+   [Tooltip("Event is triggered when UDPServer receivs the external server ip")]
+   public UnityEvent<string> OnIpReceived;
+   
+   [Tooltip("Event is triggered when UDPServer is requested to change travel method")]
+   public UnityEvent<string> OnTravelChange;
 
-    [Tooltip("Event is triggered when UDPServer is requested to change steering method")]
-    public UnityEvent<string> OnMethodChange;
-
-    [Tooltip("Event is triggered when UDPServer is requested to change travel method")]
-    public UnityEvent<string> OnTravelChange;
 
     [Tooltip("Event is triggered when UDPServer is requested to go to next game state")]
     public UnityEvent<string> OnNextGameState;
@@ -134,10 +137,11 @@ public class UDPServer : MonoBehaviour
         }
     }
 
-    void HandleUDPMessage(string msg)
-    {
-        switch (msg.Substring(0, 2))
-        {
+    void HandleUDPMessage(string msg) {
+        switch(msg.Substring(0, 2)) {
+            case "ip":
+                OnIpReceived?.Invoke(msg);
+                break;
             case "an":
                 InfoBoard.Instance.SetSpeedText("Speed: " + msg);
                 OnSpeedInput?.Invoke(msg);

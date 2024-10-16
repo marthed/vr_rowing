@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Singleton;
 using System.Text;
-using System;
-
+using System.Text.RegularExpressions;
 enum RequestType {
     GET,
     POST,
@@ -15,7 +14,7 @@ public class HTTPClient : Singleton<HTTPClient>
 {
 
     [Header("Settings")]
-    public string serverAddress = "http://192.168.209.92";
+    public string receivingServerAddress = "http://192.168.180.92";
     public int serverPort = 3000;
     private string _dataToSend = "";
 
@@ -40,12 +39,24 @@ public class HTTPClient : Singleton<HTTPClient>
 
     public void PostRequest(string route, string data)
     {
-        string url = serverAddress + ":" + serverPort + "/" + route;
+        string url = receivingServerAddress + ":" + serverPort + "/" + route;
         Debug.Log("Sending request to: " + url);
         Debug.Log(data);
         _dataToSend = data;
         StartCoroutine(SendRequest(data, RequestType.POST, url));
 
+    }
+
+    public void SetExternalServerIp(string msg) {
+        string ip = msg.Split(";")[1];
+
+        string trimmedString = ip.Trim();
+        string noNull = trimmedString.Replace("\0", "");
+        string cleanedString = Regex.Replace(noNull, @"[^\u0020-\u007E]", "");
+        
+        Debug.Log($"Trimmed String: '{cleanedString}'");
+
+        receivingServerAddress = "http://" + cleanedString;
     }
         
 

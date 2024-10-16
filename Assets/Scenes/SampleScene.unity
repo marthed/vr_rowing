@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.58812344, g: 0.59516925, b: 0.5994878, a: 1}
+  m_IndirectSpecularColor: {r: 0.5881238, g: 0.5951698, b: 0.5994882, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4196,6 +4196,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnSpeedInput.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -4217,6 +4221,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnHandInput.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
@@ -4243,6 +4251,10 @@ PrefabInstance:
       propertyPath: OnTrackChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1322555635433130319}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnSpeedInput.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4284,6 +4296,10 @@ PrefabInstance:
       value: HandMethod
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnNextGameState.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 292617535}
@@ -4295,6 +4311,10 @@ PrefabInstance:
       propertyPath: OnDirectionInput.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 975821681}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetExternalServerIp
+      objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnSpeedInput.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetSpeedForce
@@ -4348,6 +4368,10 @@ PrefabInstance:
       value: RowLocomotionController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HTTPClient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnSpeedInput.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: RowLocomotionController, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -4373,6 +4397,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
       propertyPath: OnHandInput.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+      propertyPath: OnIpReceived.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1322555635146605480, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
@@ -4441,6 +4469,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+--- !u!114 &1322555635433130319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5363751430636011467, guid: b2468e66bb960a841b90e6415618d43a, type: 3}
+  m_PrefabInstance: {fileID: 1322555635433130318}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e0f7aa073bb894bae3b24990977750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2793728010272939535
 PrefabInstance:
   m_ObjectHideFlags: 0
